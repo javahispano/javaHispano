@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Tag">
+    
+    <!-- =========================== ALIAS =========================== -->
+    <typeAlias alias="tag" type="org.javahispano.portal.domain.content.Tag"/>
+  
+    <!-- ============================ MAPS ============================ -->
+
+    <resultMap id="tagResult" class="tag">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="timesUsed" column="times_used" nullValue="0"/>
+    </resultMap>
+
+    <!-- ======================== CACHE ======================= -->
+    
+    <cacheModel id="tagCache" type="LRU">
+        <flushInterval hours="48"/>
+        <flushOnExecute statement="Tag.saveTag"/>
+        <flushOnExecute statement="Tag.updateTag"/> 
+        <property name="size" value="200"/>
+        <property name="read-only" value="true"/>
+    </cacheModel>
+    
+    <!-- ======================== STATEMENTS ======================= -->
+    
+    <sql id="getTag">
+        <![CDATA[
+            SELECT id,
+            	   name,
+            	   times_used
+            FROM tag
+        ]]>
+    </sql>
+    
+    <select id="getTagById" resultMap="tagResult" cacheModel="tagCache">
+        <include refid="Tag.getTag"/>
+        <![CDATA[
+            WHERE id = #id#
+        ]]>
+    </select>
+    
+    <select id="getTagByName" resultMap="tagResult" cacheModel="tagCache">
+        <include refid="Tag.getTag"/>
+        <![CDATA[
+            WHERE name = #name#
+        ]]>
+    </select>
+
+    <select id="getTagsByContentId" resultMap="tagResult" cacheModel="tagCache">
+        <include refid="Tag.getTag"/>
+        <![CDATA[
+            WHERE id IN (SELECT tag_id FROM content_tag WHERE content_id = #contentId#)
+        ]]>
+    </select>
+
+    <update id="updateTagUsage">
+    	<![CDATA[
+            UPDATE tag 
+            SET times_used = times_used + #variation#
+            WHERE id IN (SELECT tag_id FROM content_tag WHERE content_id = #contentId#) 
+        ]]>
+    </update>
+    
+    <update id="updateTag" parameterClass="tag">
+    	<![CDATA[
+            UPDATE tag 
+            SET name       = #name#,
+            	times_used = #timesUsed#
+            WHERE id = #id#
+        ]]>
+    </update>
+    
+	<insert id="saveTag" parameterClass="tag">
+        <selectKey keyProperty="id" resultClass="long"> 
+            SELECT nextval('tag_id_seq')    
+        </selectKey>
+        <![CDATA[
+        	INSERT INTO tag(id, name, times_used)
+			VALUES (#id#, #name#, 0)
+   		]]>
+    </insert>
+</sqlMap>

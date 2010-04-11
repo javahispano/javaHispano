@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="org.javahispano.portal.web"/>
+
+	<!-- Sets up standard HandlerMapping and HanderAdapter for use with annotations.
+	     Allows customization of various MVC-related aspects like binding and validation. -->
+	<mvc:annotation-driven />
+	
+	<mvc:view-controller path="/login"/>
+<!-- 
+    <bean id="conversionServiceMvc" class="org.springframework.context.support.ConversionServiceFactoryBean">
+	     <property name="converters">
+	        <list>
+	            <bean class="org.javahispano.portal.converter.StringToTagSetConverter" />
+	            <bean class="org.javahispano.portal.converter.TagSetToStringConverter" />
+	            <bean class="org.javahispano.portal.converter.TagToStringConverter" />
+	        </list>
+	    </property>
+	</bean>
+ -->
+	<!-- Configurer that sets up a shared FreeMarker Configuration for FreeMarker views	-->
+	<bean id="freemarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+		p:defaultEncoding="UTF-8" p:templateLoaderPath="/WEB-INF/templates/" />
+
+	<!-- Simple ViewResolver for FreeMarker, appending ".ftl" to logical view names. -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+		p:cache="true" p:prefix="" p:suffix=".ftl" p:contentType="text/html; charset=UTF-8"
+		p:exposeSpringMacroHelpers="true" p:exposeRequestAttributes="true"
+		p:exposeSessionAttributes="true" p:allowSessionOverride="true" />
+	
+</beans>

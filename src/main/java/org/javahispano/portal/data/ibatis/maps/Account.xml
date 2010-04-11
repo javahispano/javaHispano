@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Account">
+    
+    <!-- =========================== ALIAS =========================== -->
+    <typeAlias alias="account" type="org.javahispano.portal.domain.account.Account"/>
+  
+    <!-- ============================ MAPS ============================ -->
+
+    <resultMap id="accountResult" class="account">
+        <result property="id" column="id"/>
+        <result property="username" column="username" nullValue=""/>
+        <result property="password" column="password"/>
+        <result property="email" column="email" nullValue=""/>
+        <result property="firstName" column="first_name" nullValue=""/>
+        <result property="lastName" column="last_name" nullValue=""/>
+        <result property="lastLogin" column="last_login"/>
+        <result property="lastModification" column="last_modification"/>
+        <result property="signupDate" column="signup_date"/>
+        <result property="deleted" column="deleted" nullValue="false"/>
+        <result property="enabled" column="enabled" nullValue="false"/>
+        <result property="accountNonExpired" column="account_non_expired" nullValue="false"/>
+        <result property="accountNonLocked" column="account_non_locked" nullValue="false"/>
+        <result property="credentialsNonExpired" column="credentials_non_expired" nullValue="false"/>
+    </resultMap>
+
+    <!-- ======================== CACHE ======================= -->
+    
+    <cacheModel id="accountCache" type="LRU">
+        <flushInterval hours="48"/>
+        <flushOnExecute statement="Account.saveAccount"/>
+        <flushOnExecute statement="Account.updateAccount"/> 
+        <property name="size" value="1000"/>
+        <property name="read-only" value="true"/>
+    </cacheModel>
+    
+    <!-- ======================== STATEMENTS ======================= -->
+    
+    <sql id="getAccount">
+        <![CDATA[
+            SELECT id, 
+            	   username
+                   password,
+                   email,
+                   first_name,
+                   last_name,
+                   last_login,
+                   last_modification,
+                   signup_date,
+                   deleted,
+                   enabled,
+                   account_non_expired,
+                   account_non_locked,
+                   credentials_non_expired
+            FROM account
+        ]]>
+    </sql>
+    
+    <select id="getAccountById" resultMap="accountResult" cacheModel="accountCache">
+        <include refid="Account.getAccount"/>
+        <![CDATA[
+            WHERE id = #id#
+        ]]>
+    </select>
+    
+    <select id="getAccountByEmail" resultMap="accountResult" cacheModel="accountCache">
+        <include refid="Account.getAccount"/>
+        <![CDATA[
+            WHERE email = #email#
+        ]]>
+    </select>
+
+    <select id="getAccountByUsername" resultMap="accountResult" cacheModel="accountCache">
+        <include refid="Account.getAccount"/>
+        <![CDATA[
+            WHERE username = #username#
+        ]]>
+    </select>
+     
+    <update id="updateAccount">
+    
+    </update>
+    
+    <update id="updateLastLogin">
+        <![CDATA[
+            UPDATE account
+            SET last_login  = #lastLogin#
+            WHERE id        = #accountId#
+         ]]>
+    </update>
+
+	<insert id="saveAccount" parameterClass="account">
+        <selectKey keyProperty="id" resultClass="long"> 
+            SELECT nextval('account_id_seq')    
+        </selectKey>
+        <![CDATA[
+            INSERT INTO account (id,
+            					 username, 
+		                   		 password,
+		                   		 email,
+			                     first_name,
+			                     last_name,
+			                     address,
+			                     postal_code,
+			                     city,
+			                     country,
+			                     date_of_birth,
+			                     telephone,
+			                     signup_date,
+			                     deleted,
+			                     enabled,
+			                     account_non_expired,
+			                     account_non_locked,
+			                     credentials_non_expired)
+			VALUES (#id#, 
+            		#username#,
+                    #password#, 
+                    #email#, 
+                    #firstName#,
+                    #lastName#,
+                    #signupDate#,
+                    #deleted#,
+                    #enabled#,
+                    #accountNonExpired#,
+                    #accountNonLocked#,
+                    #credentialsNonExpired#)
+        ]]>
+    </insert>
+</sqlMap>

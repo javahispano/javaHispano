@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Content">
+    
+    <!-- =========================== ALIAS =========================== -->
+    <typeAlias alias="content" type="org.javahispano.portal.domain.content.Content"/>
+  
+    <!-- ============================ MAPS ============================ -->
+
+    <resultMap id="contentResult" class="content">
+        <result property="id" column="id"/>
+        <result property="user.id" column="user_id"/>
+        <result property="title" column="title" />
+        <result property="sluggedTitle" column="slugged_title" />
+        <result property="body" column="body" />
+        <result property="highlighted" column="highlighted" nullValue="false"/>
+        <result property="highlightOrder" column="highlight_order" nullValue="0"/>
+        <result property="draft" column="draft" nullValue="false"/>
+        <result property="numVisits" column="num_visits" nullValue="0"/>
+        <result property="numComments" column="num_comments" nullValue="0"/>
+        <result property="lastComment" column="last_comment"/>
+        <result property="creationDate" column="creation_date"/>
+        <result property="modificationDate" column="modification_date"/>
+    </resultMap>
+
+    <!-- ======================== CACHE ======================= -->
+    
+    <cacheModel id="contentCache" type="LRU">
+        <flushInterval hours="48"/>
+        <flushOnExecute statement="Content.saveContent"/>
+        <flushOnExecute statement="Content.updateContent"/> 
+        <property name="size" value="200"/>
+        <property name="read-only" value="true"/>
+    </cacheModel>
+    
+    <!-- ======================== STATEMENTS ======================= -->
+    
+    <sql id="getContent">
+        <![CDATA[
+            SELECT id,
+            	   user_id, 
+				   title, 
+				   slugged_title,
+				   body, 
+				   highlighted, 
+			 	   highlight_order, 
+				   draft, 
+  				   num_visits, 
+  				   num_comments, 
+  				   last_comment, 
+  				   creation_date, 
+  				   modification_date
+            FROM Content
+        ]]>
+    </sql>
+    
+    <select id="getContentById" resultMap="contentResult" cacheModel="contentCache">
+        <include refid="Content.getContent"/>
+        <![CDATA[
+            WHERE id = #id#
+        ]]>
+    </select>
+   
+   	<select id="getHighlightedContent" resultMap="contentResult" cacheModel="contentCache">
+        <include refid="Content.getContent"/>
+        <![CDATA[
+            WHERE highlighted = true AND deleted = false
+        ]]>
+    </select>
+    
+    <select id="getContents" resultMap="contentResult" cacheModel="contentCache">
+        <include refid="Content.getContent"/>
+    </select>
+    
+    <update id="updateContent" parameterClass="content">
+    	<![CDATA[
+            UPDATE content 
+            SET title             = #title#,
+            	slugged_title	  = #sluggedTitle#,
+            	body              = #body#,
+            	highlighted       = #highlighted#, 
+        		highlight_order   = #highlightOrder#, 
+        		draft             = #draft#, 
+				num_visits		  = #numVisits#,
+				num_comments      = #numComments#, 
+				last_comment      = #lastComment#, 
+				modification_date = #modificationDate#
+            WHERE id = #id#
+        ]]>
+    </update>
+    
+	<insert id="saveContent" parameterClass="content">
+        <selectKey keyProperty="id" resultClass="long"> 
+            SELECT nextval('content_id_seq')    
+        </selectKey>
+        <![CDATA[
+        	INSERT INTO content(id, 
+        						user_id, 
+        						title, 
+        						slugged_title,
+        						body, 
+        						highlighted, 
+        						highlight_order, 
+        						draft, 
+            					creation_date)
+			VALUES (#id#,
+					#user.id#, 
+					#title#, 
+					#sluggedTitle#,
+					#body#, 
+					#highlighted#, 
+					#highlightOrder#, 
+					#draft#, 
+   					#creationDate#)
+   		]]>
+    </insert>
+        
+    <insert id="bindContentTag">
+ 		<![CDATA[
+            INSERT INTO content_tag (content_id, tag_id)
+            VALUES (#contentId#, #tagId#)
+         ]]>
+    </insert>
+    
+    <delete id="unbindContentTags">
+     	<![CDATA[
+            DELETE FROM content_tag
+            WHERE content_id = #contentId#
+         ]]>
+    </delete>
+</sqlMap>
