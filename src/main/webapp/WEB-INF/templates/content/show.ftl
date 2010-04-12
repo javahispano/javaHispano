@@ -12,5 +12,15 @@
 			<dd>${tag.name} x ${tag.timesUsed}</dd>
             [/#list]	
 		</dl>
+		
+		<h3>[@spring.messageText "content.field.comments", "Comentarios"/]</h3>
+		[#list content.comments as comment]
+			${comment.creationDate?datetime} - ${comment.body?html}<br/>
+        [/#list]
+		
+		<form action="[@spring.url "/content/${content.id}/comment"/]" method="post">
+			<textarea name="comment"></textarea>
+			<button type="submit">[@spring.messageText "common.button.send", "Enviar"/]</button>
+		</form>
 	</body>
 </html>

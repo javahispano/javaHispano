@@ -12,7 +12,7 @@
 				<dd>
             		<input type="text" class="title" name="j_username" id="j_username" maxlength="40" size="20" />
             	</dd>
-            	<dt><label>[@spring.messageText "account.field.password", "Contraseña" /]</label></dt>
+            	<dt><label>[@spring.messageText "account.field.password", "Contrase√±a" /]</label></dt>
             	<dd>
             		<input type="password" class="title" name="j_password" id="j_password" maxlength="16" size="20"/>
             	<dd>

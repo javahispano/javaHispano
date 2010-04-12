@@ -1,7 +1,8 @@
 package org.javahispano.portal.service;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.javahispano.portal.domain.content.Comment;
 import org.javahispano.portal.domain.content.Content;
 
 /**
@@ -23,14 +24,14 @@ public interface ContentService {
 	 * 
 	 * @return a collection with the highlighted <code>Content</code> 
 	 */
-	Collection<Content> getHighlightedContent();
+	List<Content> getHighlightedContent();
 	
 	/**
 	 * Retrieves all content
 	 * 
 	 * @return a collection with all <code>Content</code> 
 	 */
-	Collection<Content> getAllContent();
+	List<Content> getAllContent();
 	
 	/**
 	 * Saves a <code>Content</code>
@@ -38,4 +39,11 @@ public interface ContentService {
 	 * @param content the content to save
 	 */
 	void saveContent(Content content);
+	
+	/**
+	 * Saves a <code>Comment</code>
+	 * 
+	 * @param content the comment to save
+	 */
+	void saveComment(Comment comment);
 } 

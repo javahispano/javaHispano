@@ -62,7 +62,15 @@ public class ContentServiceImpl implements ContentService {
 	}
 	
 	public void saveComment(Comment comment) {
+		
+		// Save comment
 		comment.setCreationDate(new Date());
 		commentDao.save(comment);
+		
+		// Update content
+		Content content = comment.getContent();
+		content.setLastComment(comment.getCreationDate());
+		// TODO increment comment number
+		contentDao.save(content);
 	}
 }

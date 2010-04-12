@@ -18,6 +18,14 @@ public class Comment extends IdentifiableObject {
 	private boolean deleted;
 	private Date creationDate;
 	
+	public Comment() {
+		
+	}
+	
+	public Comment(String body) {
+		this.body = body;
+	}
+	
 	public Content getContent() {
 		return content;
 	}
