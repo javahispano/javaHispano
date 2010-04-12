@@ -12,11 +12,18 @@ import org.javahispano.portal.domain.account.Account;
  */
 public class Comment extends IdentifiableObject {
 	
+	private Content content;
 	private Account user;
 	private String body;
 	private boolean deleted;
 	private Date creationDate;
 	
+	public Content getContent() {
+		return content;
+	}
+	public void setContent(Content content) {
+		this.content = content;
+	}
 	public Account getUser() {
 		return user;
 	}

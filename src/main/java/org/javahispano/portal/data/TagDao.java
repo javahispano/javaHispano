@@ -1,6 +1,6 @@
 package org.javahispano.portal.data;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.javahispano.portal.domain.content.Tag;
 
@@ -25,7 +25,7 @@ public interface TagDao extends GenericDao<Long, Tag> {
 	 * @param contentId the if ob the content
 	 * @return the collection of tags bound to the content
 	 */
-	Collection<Tag> getByContentId(long contentId);
+	List<Tag> getByContentId(long contentId);
 	
 	/**
 	 * Increments the usage (times used) to the tags bound to the specified content

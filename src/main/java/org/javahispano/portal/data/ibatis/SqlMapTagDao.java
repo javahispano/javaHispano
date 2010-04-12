@@ -1,6 +1,5 @@
 package org.javahispano.portal.data.ibatis;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +25,8 @@ public class SqlMapTagDao extends SqlMapGenericDao<Long, Tag> implements TagDao 
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Tag> getByContentId(long contentId) {
-		return (List<Tag>) sqlMapClientTemplate.queryForList(this.getNamespace() + "getTagsByContentId" , contentId);
+	public List<Tag> getByContentId(long contentId) {
+		return sqlMapClientTemplate.queryForList(this.getNamespace() + "getTagsByContentId" , contentId);
 	}
 	
 	

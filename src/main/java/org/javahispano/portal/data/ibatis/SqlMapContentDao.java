@@ -1,12 +1,12 @@
 package org.javahispano.portal.data.ibatis;
 
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.javahispano.portal.data.CommentDao;
 import org.javahispano.portal.data.ContentDao;
 import org.javahispano.portal.data.TagDao;
 import org.javahispano.portal.domain.content.Content;
@@ -17,8 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 
-/**
-* iBatis 2 implementation of the content DAO 
+/* ibatis 2 implementation of the content DAO 
 *
 * @author Sergi Almar i Graupera
 */
@@ -27,6 +26,8 @@ public class SqlMapContentDao extends SqlMapGenericDao<Long, Content> implements
 
 	@Autowired
 	private TagDao tagDao;
+	@Autowired
+	private CommentDao commentDao;
 	
 	public SqlMapContentDao() {
 		super(Content.class);
@@ -39,14 +40,15 @@ public class SqlMapContentDao extends SqlMapGenericDao<Long, Content> implements
 		// Retrieve tags
 		if(content != null) {
 			content.setTags(new HashSet<Tag>(tagDao.getByContentId(content.getId())));
+			content.setComments(commentDao.getByContentId(content.getId()));
 		}
 		
 		return content;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Collection<Content> getHighlightedContent() {
-		return (List<Content>) sqlMapClientTemplate.queryForList(this.getNamespace() + "getHighlightedContent");
+	public List<Content> getHighlightedContent() {
+		return sqlMapClientTemplate.queryForList(this.getNamespace() + "getHighlightedContent");
 	}
 	
 	@Override

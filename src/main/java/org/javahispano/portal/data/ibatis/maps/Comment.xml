@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Comment">
+    
+    <!-- =========================== ALIAS =========================== -->
+    
+    <typeAlias alias="comment" type="org.javahispano.portal.domain.content.Comment"/>
+  
+    <!-- ============================ MAPS ============================ -->
+
+    <resultMap id="commentResult" class="comment">
+        <result property="id" column="id"/>
+		<result property="content.id" column="content_id"/>
+        <result property="user.id" column="user_id"/>
+        <result property="body" column="body"/>
+        <result property="deleted" column="deleted"/>
+        <result property="creationDate" column="creation_date"/>
+    </resultMap>
+
+    <!-- =========================== CACHE ========================= -->
+    
+    <cacheModel id="commentCache" type="LRU">
+        <flushInterval hours="48"/>
+        <flushOnExecute statement="Comment.saveComment"/> 
+        <property name="size" value="500"/>
+        <property name="read-only" value="true"/>
+    </cacheModel>
+    
+    <!-- ========================= STATEMENTS ======================= -->
+    
+    <sql id="getComment">
+        <![CDATA[
+            SELECT id,
+            	   content_id,
+            	   user_id,
+            	   body,
+            	   deleted,
+            	   creation_date
+            FROM comment
+        ]]>
+    </sql>
+    
+    <select id="getCommentById" resultMap="commentResult" cacheModel="commentCache">
+        <include refid="Comment.getComment"/>
+        <![CDATA[
+            WHERE id = #id#
+        ]]>
+    </select>
+    
+    <select id="getCommentsByContentId" resultMap="commentResult" cacheModel="commentCache">
+        <include refid="Comment.getComment"/>
+        <![CDATA[
+            WHERE content_id = #contentId#
+        ]]>
+    </select>
+
+	<insert id="saveComment" parameterClass="comment">
+        <selectKey keyProperty="id" resultClass="long"> 
+            SELECT nextval('comment_id_seq')    
+        </selectKey>
+        <![CDATA[
+        	INSERT INTO comment (id, content_id, user_id, body, deleted, creation_date)
+			VALUES (#id#, #content.id#, #user.id#, #body#, false, #creationDate#)
+   		]]>
+    </insert>
+</sqlMap>

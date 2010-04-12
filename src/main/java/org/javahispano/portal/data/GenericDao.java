@@ -1,6 +1,7 @@
 package org.javahispano.portal.data;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.javahispano.portal.domain.IdentifiableObject;
@@ -16,7 +17,7 @@ public interface GenericDao<K, T extends IdentifiableObject> {
 	 * Retrieve all object of a certain type
 	 * @return a list of requested object
 	 */
-	Collection<T> getAll();
+	List<T> getAll();
 	
 	/**
 	 * Retrieve an object by its id

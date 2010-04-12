@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import org.javahispano.portal.domain.account.Account;
+import org.javahispano.portal.domain.content.Comment;
 import org.javahispano.portal.domain.content.Content;
 import org.javahispano.portal.domain.content.Tag;
 import org.junit.Before;
@@ -58,5 +60,18 @@ public class ContentServiceTests {
 		assertNotNull(testContent.getId());
 		contentService.saveContent(testContent);
 		assertNotNull(testContent.getModificationDate());
+	}
+	
+	@Test
+	public void testSaveComment() {
+		contentService.saveContent(testContent);
+		
+		Comment comment = new Comment();
+		comment.setBody("Me apunto al evento!");
+		comment.setContent(testContent);
+		comment.setUser(new Account());
+		
+		contentService.saveComment(comment);
+		assertNotNull(comment.getId());
 	}
 }

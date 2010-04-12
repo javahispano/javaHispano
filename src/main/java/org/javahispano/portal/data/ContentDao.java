@@ -1,6 +1,6 @@
 package org.javahispano.portal.data;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.javahispano.portal.domain.content.Content;
 
@@ -10,5 +10,5 @@ import org.javahispano.portal.domain.content.Content;
  * @author Sergi Almar i Graupera
  */
 public interface ContentDao extends GenericDao<Long, Content> {
-	Collection<Content> getHighlightedContent();
+	List<Content> getHighlightedContent();
 }
