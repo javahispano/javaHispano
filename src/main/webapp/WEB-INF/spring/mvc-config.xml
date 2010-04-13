@@ -12,8 +12,9 @@
 
 	<!-- Sets up standard HandlerMapping and HanderAdapter for use with annotations.
 	     Allows customization of various MVC-related aspects like binding and validation. -->
-	<mvc:annotation-driven />
-	
+	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven/>
+		
 	<mvc:view-controller path="/login"/>
 <!-- 
     <bean id="conversionServiceMvc" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -35,6 +36,7 @@
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
 		p:cache="true" p:prefix="" p:suffix=".ftl" p:contentType="text/html; charset=UTF-8"
+		p:viewClass="org.javahispano.portal.web.view.FreeMarkerHelperView"
 		p:exposeSpringMacroHelpers="true" p:exposeRequestAttributes="true"
 		p:exposeSessionAttributes="true" p:allowSessionOverride="true" />
 	

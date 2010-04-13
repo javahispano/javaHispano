@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+	<!--
+		PrettyTime is an OpenSource Java time comparison library for creating
+		human readable time. Copyright (C) 2009 - Lincoln Baxter, III
+		<lincoln@ocpsoft.com> This program is free software: you can
+		redistribute it and/or modify it under the terms of the GNU Lesser
+		General Public License as published by the Free Software Foundation,
+		either version 3 of the License, or (at your option) any later
+		version. This program is distributed in the hope that it will be
+		useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+		Lesser General Public License for more details. You should have
+		received a copy of the GNU Lesser General Public License along with
+		this program. If not, see the file COPYING.LESSER3 or visit the GNU
+		website at <http://www.gnu.org/licenses/>.
+	-->
+
+<properties>
+
+	<!-- Century -->
+	<entry key="CenturyPattern">%n %u</entry>
+	<entry key="CenturyFuturePrefix">daqui a </entry>
+	<entry key="CenturyFutureSuffix"></entry>
+	<entry key="CenturyPastPrefix"></entry>
+	<entry key="CenturyPastSuffix"> atrás</entry>
+	<entry key="CenturyName">século</entry>
+	<entry key="CenturyPluralName">séculos</entry>
+
+    <!-- Day -->
+	<entry key="DayPattern">%n %u</entry>
+	<entry key="DayFuturePrefix">daqui a </entry>
+	<entry key="DayFutureSuffix"></entry>
+	<entry key="DayPastPrefix"></entry>
+	<entry key="DayPastSuffix"> atrás</entry>
+	<entry key="DayName">dia</entry>
+	<entry key="DayPluralName">dias</entry>
+
+    <!-- Decade -->
+	<entry key="DecadePattern">%n %u</entry>
+	<entry key="DecadeFuturePrefix">daqui a </entry>
+	<entry key="DecadeFutureSuffix"></entry>
+	<entry key="DecadePastPrefix"></entry>
+	<entry key="DecadePastSuffix"> atrás</entry>
+	<entry key="DecadeName">década</entry>
+	<entry key="DecadePluralName">décadas</entry>
+
+    <!-- Hour -->
+	<entry key="HourPattern">%n %u</entry>
+	<entry key="HourFuturePrefix">daqui a </entry>
+	<entry key="HourFutureSuffix"></entry>
+	<entry key="HourPastPrefix"></entry>
+	<entry key="HourPastSuffix"> atrás</entry>
+	<entry key="HourName">hora</entry>
+	<entry key="HourPluralName">horas</entry>
+
+    <!-- JustNow -->
+	<entry key="JustNowPattern">%u</entry>
+	<entry key="JustNowFuturePrefix">agora mesmo</entry>
+	<entry key="JustNowFutureSuffix"></entry>
+	<entry key="JustNowPastPrefix">agora há pouco</entry>
+	<entry key="JustNowPastSuffix"></entry>
+	<entry key="JustNowName"></entry>
+	<entry key="JustNowPluralName"></entry>
+
+    <!-- Millennium -->
+	<entry key="MillenniumPattern">%n %u</entry>
+	<entry key="MillenniumFuturePrefix">daqui a </entry>
+	<entry key="MillenniumFutureSuffix"></entry>
+	<entry key="MillenniumPastPrefix"></entry>
+	<entry key="MillenniumPastSuffix"> atrás</entry>
+	<entry key="MillenniumName">milênio</entry>
+	<entry key="MillenniumPluralName">milênios</entry>
+
+    <!-- Millisecond -->
+	<entry key="MillisecondPattern">%n %u</entry>
+	<entry key="MillisecondFuturePrefix">daqui a </entry>
+	<entry key="MillisecondFutureSuffix"></entry>
+	<entry key="MillisecondPastPrefix"></entry>
+	<entry key="MillisecondPastSuffix"> atrás</entry>
+	<entry key="MillisecondName">millisegundo</entry>
+	<entry key="MillisecondPluralName">millisegundos</entry>
+
+    <!-- Minute -->
+	<entry key="MinutePattern">%n %u</entry>
+	<entry key="MinuteFuturePrefix">daqui a </entry>
+	<entry key="MinuteFutureSuffix"></entry>
+	<entry key="MinutePastPrefix"></entry>
+	<entry key="MinutePastSuffix"> atrás</entry>
+	<entry key="MinuteName">minuto</entry>
+	<entry key="MinutePluralName">minutos</entry>
+
+    <!-- Month -->
+	<entry key="MonthPattern">%n %u</entry>
+	<entry key="MonthFuturePrefix">daqui a </entry>
+	<entry key="MonthFutureSuffix"></entry>
+	<entry key="MonthPastPrefix"></entry>
+	<entry key="MonthPastSuffix"> atrás</entry>
+	<entry key="MonthName">mês</entry>
+	<entry key="MonthPluralName">meses</entry>
+
+    <!-- Second -->
+	<entry key="SecondPattern">%n %u</entry>
+	<entry key="SecondFuturePrefix">daqui a </entry>
+	<entry key="SecondFutureSuffix"></entry>
+	<entry key="SecondPastPrefix"></entry>
+	<entry key="SecondPastSuffix"> atrás</entry>
+	<entry key="SecondName">segundo</entry>
+	<entry key="SecondPluralName">segundos</entry>
+
+    <!-- Week -->
+	<entry key="WeekPattern">%n %u</entry>
+	<entry key="WeekFuturePrefix">daqui a </entry>
+	<entry key="WeekFutureSuffix"></entry>
+	<entry key="WeekPastPrefix"></entry>
+	<entry key="WeekPastSuffix"> atrás</entry>
+	<entry key="WeekName">semana</entry>
+	<entry key="WeekPluralName">semanas</entry>
+
+    <!-- Year -->
+	<entry key="YearPattern">%n %u</entry>
+	<entry key="YearFuturePrefix">daqui a </entry>
+	<entry key="YearFutureSuffix"></entry>
+	<entry key="YearPastPrefix"></entry>
+	<entry key="YearPastSuffix"> atrás</entry>
+	<entry key="YearName">ano</entry>
+	<entry key="YearPluralName">anos</entry>
+
+    <!-- AbstractTimeUnit -->
+	<entry key="AbstractTimeUnitPattern"></entry>
+	<entry key="AbstractTimeUnitFuturePrefix"></entry>
+	<entry key="AbstractTimeUnitFutureSuffix"></entry>
+	<entry key="AbstractTimeUnitPastPrefix"></entry>
+	<entry key="AbstractTimeUnitPastSuffix"></entry>
+	<entry key="AbstractTimeUnitName"></entry>
+	<entry key="AbstractTimeUnitPluralName"></entry>
+
+</properties>

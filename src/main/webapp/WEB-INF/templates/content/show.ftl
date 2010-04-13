@@ -15,9 +15,10 @@
 		
 		<h3>[@spring.messageText "content.field.comments", "Comentarios"/]</h3>
 		[#list content.comments as comment]
-			${comment.creationDate?datetime} - ${comment.body?html}<br/>
+			[@jh.prettifyMe comment.creationDate /] - ${comment.body?html}<br/>
         [/#list]
 		
+		[@spring.messageText "content.comment.new", "Añadir comentario"/]</h3>
 		<form action="[@spring.url "/content/${content.id}/comment"/]" method="post">
 			<textarea name="comment"></textarea>
 			<button type="submit">[@spring.messageText "common.button.send", "Enviar"/]</button>

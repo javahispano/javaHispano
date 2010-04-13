@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<!--
+    PrettyTime is an OpenSource Java time comparison library for creating human
+    readable time.
+
+    Copyright (C) 2009 - Lincoln Baxter, III <lincoln@ocpsoft.com>
+
+    This program is free software: you can redistribute it and/or modify it under
+    the terms of the GNU Lesser General Public License as published by the Free
+    Software Foundation, either version 3 of the License, or (at your option) any
+    later version.
+
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+    FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+    details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see the file COPYING.LESSER3 or visit the
+    GNU website at <http://www.gnu.org/licenses/>.
+-->
+
+<properties>
+
+    <!-- Century -->
+	<entry key="CenturyPattern">%n %u</entry>
+	<entry key="CenturyFuturePrefix"></entry>
+	<entry key="CenturyFutureSuffix">后</entry>
+	<entry key="CenturyPastPrefix"></entry>
+	<entry key="CenturyPastSuffix">前</entry>
+	<entry key="CenturyName">世纪</entry>
+	<entry key="CenturyPluralName">世纪</entry>
+
+    <!-- Day -->
+	<entry key="DayPattern">%n %u</entry>
+	<entry key="DayFuturePrefix"></entry>
+	<entry key="DayFutureSuffix">后</entry>
+	<entry key="DayPastPrefix"></entry>
+	<entry key="DayPastSuffix">前</entry>
+	<entry key="DayName">天</entry>
+	<entry key="DayPluralName">天</entry>
+
+    <!-- Decade -->
+	<entry key="DecadePattern">%n%u</entry>
+	<entry key="DecadeFuturePrefix"></entry>
+	<entry key="DecadeFutureSuffix">后</entry>
+	<entry key="DecadePastPrefix"></entry>
+	<entry key="DecadePastSuffix">前</entry>
+	<entry key="DecadeName">0 年</entry>
+	<entry key="DecadePluralName">0 年</entry>
+
+    <!-- Hour -->
+	<entry key="HourPattern">%n %u</entry>
+	<entry key="HourFuturePrefix"></entry>
+	<entry key="HourFutureSuffix">后</entry>
+	<entry key="HourPastPrefix"></entry>
+	<entry key="HourPastSuffix">前</entry>
+	<entry key="HourName">小时</entry>
+	<entry key="HourPluralName">小时</entry>
+
+    <!-- JustNow -->
+	<entry key="JustNowPattern">%u</entry>
+	<entry key="JustNowFuturePrefix"></entry>
+	<entry key="JustNowFutureSuffix">刚刚</entry>
+	<entry key="JustNowPastPrefix">片刻之前</entry>
+	<entry key="JustNowPastSuffix"></entry>
+	<entry key="JustNowName"></entry>
+	<entry key="JustNowPluralName"></entry>
+
+    <!-- Millennium -->
+	<entry key="MillenniumPattern">%n %u</entry>
+	<entry key="MillenniumFuturePrefix"></entry>
+	<entry key="MillenniumFutureSuffix">后</entry>
+	<entry key="MillenniumPastPrefix"></entry>
+	<entry key="MillenniumPastSuffix">前</entry>
+	<entry key="MillenniumName">千年</entry>
+	<entry key="MillenniumPluralName">千年</entry>
+
+    <!-- Millisecond -->
+	<entry key="MillisecondPattern">%n %u</entry>
+	<entry key="MillisecondFuturePrefix"></entry>
+	<entry key="MillisecondFutureSuffix">后</entry>
+	<entry key="MillisecondPastPrefix"></entry>
+	<entry key="MillisecondPastSuffix">前</entry>
+	<entry key="MillisecondName">毫秒</entry>
+	<entry key="MillisecondPluralName">毫秒</entry>
+
+    <!-- Minute -->
+	<entry key="MinutePattern">%n %u</entry>
+	<entry key="MinuteFuturePrefix"></entry>
+	<entry key="MinuteFutureSuffix">后</entry>
+	<entry key="MinutePastPrefix"></entry>
+	<entry key="MinutePastSuffix">前</entry>
+	<entry key="MinuteName">分钟</entry>
+	<entry key="MinutePluralName">分钟</entry>
+
+    <!-- Month -->
+	<entry key="MonthPattern">%n %u</entry>
+	<entry key="MonthFuturePrefix"></entry>
+	<entry key="MonthFutureSuffix">后</entry>
+	<entry key="MonthPastPrefix"></entry>
+	<entry key="MonthPastSuffix">前</entry>
+	<entry key="MonthName">个月</entry>
+	<entry key="MonthPluralName">个月</entry>
+
+    <!-- Second -->
+	<entry key="SecondPattern">%n %u</entry>
+	<entry key="SecondFuturePrefix"></entry>
+	<entry key="SecondFutureSuffix">后</entry>
+	<entry key="SecondPastPrefix"></entry>
+	<entry key="SecondPastSuffix">前</entry>
+	<entry key="SecondName">秒</entry>
+	<entry key="SecondPluralName">秒</entry>
+
+    <!-- Week -->
+	<entry key="WeekPattern">%n %u</entry>
+	<entry key="WeekFuturePrefix"></entry>
+	<entry key="WeekFutureSuffix">后</entry>
+	<entry key="WeekPastPrefix"></entry>
+	<entry key="WeekPastSuffix">前</entry>
+	<entry key="WeekName">周</entry>
+	<entry key="WeekPluralName">周</entry>
+
+    <!-- Year -->
+	<entry key="YearPattern">%n %u</entry>
+	<entry key="YearFuturePrefix"></entry>
+	<entry key="YearFutureSuffix">后</entry>
+	<entry key="YearPastPrefix"></entry>
+	<entry key="YearPastSuffix">前</entry>
+	<entry key="YearName">年</entry>
+	<entry key="YearPluralName">年</entry>
+
+    <!-- AbstractTimeUnit -->
+	<entry key="AbstractTimeUnitPattern"></entry>
+	<entry key="AbstractTimeUnitFuturePrefix"></entry>
+	<entry key="AbstractTimeUnitFutureSuffix"></entry>
+	<entry key="AbstractTimeUnitPastPrefix"></entry>
+	<entry key="AbstractTimeUnitPastSuffix"></entry>
+	<entry key="AbstractTimeUnitName"></entry>
+	<entry key="AbstractTimeUnitPluralName"></entry>
+
+</properties>
