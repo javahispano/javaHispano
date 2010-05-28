@@ -5,7 +5,9 @@
 		<title></title>
 	</head>
 	<body>
-		<h1>javaHispano v3.0 - News</h1>	
+	    [#include "inc/headbar.ftl"]
+	    
+		<h1>javaHispano v3.0 - News</h1>
 		<a href="[@spring.url "/content/new"/]">[@spring.messageText "section.content.new", "Publicar contenido"/]</a>
 		
 		<h2>Contenido</h2>

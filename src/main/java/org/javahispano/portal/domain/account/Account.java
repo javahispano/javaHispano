@@ -10,23 +10,30 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- *  Class representing an account
- *  
- * @author Sergi Almar 
+ * Class representing an account
+ * 
+ * @author Sergi Almar
  */
 public class Account extends IdentifiableObject implements UserDetails {
 
-	protected String username;
+	private static final long serialVersionUID = -695880253279846247L;
+
+	protected String userName;
 	protected String password;
 	protected String email;
-	
+	protected String openId;
+	protected String gravatar;
+	protected String linkedIn;
+	protected String twitter;
+
 	protected String firstName;
 	protected String lastName;
-	
+
+	protected AccountVisibility accountVisibility;
 	protected Date lastLogin;
 	protected Date lastModification;
-	protected Date signupDate;	
-	
+	protected Date signupDate;
+
 	// Security fields
 	protected boolean deleted;
 	protected boolean enabled;
@@ -35,13 +42,13 @@ public class Account extends IdentifiableObject implements UserDetails {
 	protected boolean accountNonLocked;
 
 	protected Set<Role> roles = new HashSet<Role>();
-
+	
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -60,6 +67,38 @@ public class Account extends IdentifiableObject implements UserDetails {
 		this.email = email;
 	}
 
+	public void setOpenid(String openId) {
+		this.openId = openId;
+	}
+
+	public String getOpenid() {
+		return openId;
+	}
+
+	public void setGravatar(String gravatar) {
+		this.gravatar = gravatar;
+	}
+
+	public String getGravatar() {
+		return gravatar;
+	}
+
+	public void setLinkedIn(String linkedIn) {
+		this.linkedIn = linkedIn;
+	}
+
+	public String getLinkedIn() {
+		return linkedIn;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -70,6 +109,14 @@ public class Account extends IdentifiableObject implements UserDetails {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public void setAccountVisibility(AccountVisibility accountVisibility) {
+		this.accountVisibility = accountVisibility;
+	}
+
+	public AccountVisibility getAccountVisibility() {
+		return accountVisibility;
 	}
 
 	public void setLastName(String lastName) {
@@ -148,6 +195,11 @@ public class Account extends IdentifiableObject implements UserDetails {
 		this.roles = roles;
 	}
 
+	public void addRole(Role role) {
+		if (role != null) {
+			roles.add(role);
+		}
+	}
 	public Collection<GrantedAuthority> getAuthorities() {
 		return new HashSet<GrantedAuthority>(roles);
 	}

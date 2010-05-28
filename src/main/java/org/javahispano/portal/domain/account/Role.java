@@ -10,6 +10,10 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class Role extends IdentifiableObject implements GrantedAuthority {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String description;
 	

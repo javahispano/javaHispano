@@ -1,20 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Spring Security configuration -->
+	<!-- Spring Security configuration -->
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 				        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 				        http://www.springframework.org/schema/security
 				        http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
-	<http auto-config="true">
+	<http use-expressions="true">
+  		<!-- role configuration -->
+		<intercept-url pattern="/content/new/**"       access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/**"             access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/user/profile/edit/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+
+		<!--  login configuration -->
 		<form-login login-page="/login"
-					authentication-failure-url="/login?error=true" 
-					default-target-url="/index"/>
-		<logout logout-success-url="/index" />
-		<intercept-url pattern="/user/**" access="ROLE_USER" />
-		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+				    default-target-url="/user/profile"
+				    authentication-failure-url="/signup"/>
+	    <http-basic/>
+		<logout logout-success-url="/index" logout-url="/jh_security_logout"/>	
+		<custom-filter ref="openIDAuthenticationProcessingFilter" position="OPENID_FILTER"/>
 	</http>
-   
+		
+    <beans:bean id="openIDAuthenticationProcessingFilter" class="org.javahispano.portal.security.CustomOpenIDAuthenticationProcessingFilter">
+        <beans:property name="filterProcessesUrl" 		    value="/jh_openid_security_check"/>
+        <beans:property name="authenticationManager"        ref="authenticationManager"/>
+        <beans:property name="authenticationFailureHandler"	ref="openIDFilterFailure"/>
+        <beans:property name="consumer"					    ref="openID4JavaConsumer"/>
+    </beans:bean>
+    
+    <beans:bean id="openIDAuthenticationProvider" class="org.javahispano.portal.security.CustomOpenIDAuthenticationProvider">
+  		<beans:constructor-arg ref="accountDao"/>
+	</beans:bean>
+	
+	<beans:bean id="openIDFilterFailure" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/app/signup"/>
+		<beans:property name="useForward" value="true"/>
+	</beans:bean>
+	
+	<beans:bean id="openID4JavaConsumer" class="org.javahispano.portal.security.CustomOpenID4JavaConsumer"/>
+    
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="openIDAuthenticationProvider" />
+	</authentication-manager>
+	
 </beans:beans>

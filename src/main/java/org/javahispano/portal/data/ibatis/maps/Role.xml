@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Role">
+    
+    <!-- =========================== ALIAS =========================== -->
+    <typeAlias alias="role" type="org.javahispano.portal.domain.account.Role"/>
+  
+    <!-- ============================ MAPS ============================ -->
+
+    <resultMap id="roleResult" class="role">
+        <result property="id" column="id"/>
+        <result property="name" column="name" nullValue=""/>
+        <result property="description" column="description" nullValue=""/>
+	</resultMap>
+
+    <!-- ======================== CACHE ======================= -->
+    
+    <cacheModel id="roleCache" type="LRU">
+        <flushInterval hours="48"/>
+        <flushOnExecute statement="Role.saveRole"/>
+        <flushOnExecute statement="Role.updateRole"/> 
+        <property name="size" value="1000"/>
+        <property name="read-only" value="true"/>
+    </cacheModel>
+    
+    <!-- ======================== STATEMENTS ======================= -->
+    
+    <sql id="getRole">
+        <![CDATA[
+            SELECT id, 
+            	   name,
+                   description
+            FROM role
+        ]]>
+    </sql>
+    
+    <select id="getRoleById" resultMap="roleResult" cacheModel="roleCache">
+        <include refid="Role.getRole"/>
+        <![CDATA[
+            WHERE id = #id#
+        ]]>
+    </select>
+    
+    <select id="getRoleByName" resultMap="roleResult" cacheModel="roleCache">
+        <include refid="Role.getRole"/>
+        <![CDATA[
+            WHERE name = #name#
+        ]]>
+    </select>
+    
+    <select id="getRoleByDescription" resultMap="roleResult" cacheModel="roleCache">
+        <include refid="Role.getRole"/>
+        <![CDATA[
+            WHERE description = #description#
+        ]]>
+    </select>
+    
+    <select id="getRolesByAccountId" resultMap="roleResult" cacheModel="roleCache">
+        <include refid="Role.getRole"/>
+        <![CDATA[
+            WHERE id IN (SELECT role_id FROM account_role WHERE account_id = #accountId#)
+        ]]>
+    </select>
+    
+    <update id="updateRole">
+		<![CDATA[
+            UPDATE 	role
+            SET 	name 		= #name#,
+            		description = #description#
+            WHERE 	id = #id#
+        ]]>
+    </update>
+
+	<insert id="saveRole" parameterClass="role">
+        <selectKey keyProperty="id" resultClass="long"> 
+            SELECT nextval('role_id_seq')    
+        </selectKey>
+        <![CDATA[
+            INSERT INTO role (id,
+            				  name,
+            				  description
+            VALUES (#id#, 
+            		#name#,
+                    #description#)
+        ]]>
+    </insert>
+</sqlMap>

@@ -5,7 +5,11 @@
 		<title></title>
 	</head>
 	<body>
+		[#include "../inc/headbar.ftl"]
+		
 		<h2>${content.title?html}</h2>
+		<h3>Posted by <a href="[@spring.url "/user/profile/${content.user.username}"/]">${content.user.username}</a></h3> 
+<!--		<h3>Posted by ${content.user.username}</h3> -->
 		${content.body!}
 		<dl>Tags:
 			[#list content.tags as tag]

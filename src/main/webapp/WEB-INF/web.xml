@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- SpringSecurity Filter -->
-<!-- 
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>
@@ -16,7 +15,6 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
- -->
  
 	<!-- Charset Filter -->
 	<filter>
@@ -60,7 +58,7 @@
 			/WEB-INF/spring/app-config.xml
 			/WEB-INF/spring/dao-config.xml
 			/WEB-INF/spring/ibatis-config.xml
-			<!-- /WEB-INF/spring/security-config.xml -->
+		    /WEB-INF/spring/security-config.xml
 		</param-value>
 	</context-param>
 
@@ -102,7 +100,6 @@
 	</servlet-mapping>
 	
 	<!-- Resource servlet -->
-	<!-- 
 	<servlet>
 		<servlet-name>Resource Servlet</servlet-name>
 		<servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>	
@@ -113,5 +110,4 @@
 		<servlet-name>Resource Servlet</servlet-name>
 		<url-pattern>/resources/*</url-pattern>
 	</servlet-mapping>
-	 -->
 </web-app>
