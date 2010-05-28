@@ -9,5 +9,6 @@
 	<sqlMap resource="org/javahispano/portal/data/ibatis/maps/Account.xml"/>
 	<sqlMap resource="org/javahispano/portal/data/ibatis/maps/Comment.xml"/>
     <sqlMap resource="org/javahispano/portal/data/ibatis/maps/Content.xml"/>
+    <sqlMap resource="org/javahispano/portal/data/ibatis/maps/Role.xml"/>
     <sqlMap resource="org/javahispano/portal/data/ibatis/maps/Tag.xml"/>
 </sqlMapConfig>

@@ -8,8 +8,10 @@ import org.javahispano.portal.domain.account.Account;
  * Dao for Account
  * 
  * @author Sergi Almar i Graupera
+ * @author Xavier Lluch Urrutia
  */
 public interface AccountDao  extends GenericDao<Long, Account> {
+	
 	/**
 	 * Retrieves an account based on the email
 	 *
@@ -17,6 +19,15 @@ public interface AccountDao  extends GenericDao<Long, Account> {
 	 * @return the account
 	 */
 	Account getByEmail(String email);
+	
+	/**
+	 * Retrieves an account based on the openid
+	 *
+	 * @param  openid the openid of the account
+	 * @return the account
+	 */
+	Account getByOpenId(String openId);
+	
 	/**
 	 * Retrieves an account based on the username
 	 *
@@ -24,6 +35,7 @@ public interface AccountDao  extends GenericDao<Long, Account> {
 	 * @return the account
 	 */
 	Account getByUsername(String username);
+	
 	/**
 	 * Updates the last login date / time
 	 *

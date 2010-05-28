@@ -2,47 +2,57 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Account">
-    
-    <!-- =========================== ALIAS =========================== -->
-    <typeAlias alias="account" type="org.javahispano.portal.domain.account.Account"/>
-  
-    <!-- ============================ MAPS ============================ -->
 
-    <resultMap id="accountResult" class="account">
-        <result property="id" column="id"/>
-        <result property="username" column="username" nullValue=""/>
-        <result property="password" column="password"/>
-        <result property="email" column="email" nullValue=""/>
-        <result property="firstName" column="first_name" nullValue=""/>
-        <result property="lastName" column="last_name" nullValue=""/>
-        <result property="lastLogin" column="last_login"/>
-        <result property="lastModification" column="last_modification"/>
-        <result property="signupDate" column="signup_date"/>
-        <result property="deleted" column="deleted" nullValue="false"/>
-        <result property="enabled" column="enabled" nullValue="false"/>
-        <result property="accountNonExpired" column="account_non_expired" nullValue="false"/>
-        <result property="accountNonLocked" column="account_non_locked" nullValue="false"/>
-        <result property="credentialsNonExpired" column="credentials_non_expired" nullValue="false"/>
-    </resultMap>
+	<!-- =========================== ALIAS =========================== -->
+	<typeAlias alias="account"
+		type="org.javahispano.portal.domain.account.Account" />
 
-    <!-- ======================== CACHE ======================= -->
-    
-    <cacheModel id="accountCache" type="LRU">
-        <flushInterval hours="48"/>
-        <flushOnExecute statement="Account.saveAccount"/>
-        <flushOnExecute statement="Account.updateAccount"/> 
-        <property name="size" value="1000"/>
-        <property name="read-only" value="true"/>
-    </cacheModel>
-    
-    <!-- ======================== STATEMENTS ======================= -->
-    
-    <sql id="getAccount">
+	<!-- ============================ MAPS ============================ -->
+
+	<resultMap id="accountResult" class="account">
+		<result property="id" 					column="id" />
+		<result property="userName" 			column="username"  			 nullValue="false" />
+		<result property="password" 			column="password" />
+		<result property="email" 				column="email" 				 nullValue="false" />
+		<result property="openId" 				column="openid" 			 nullValue="" />
+		<result property="gravatar" 			column="gravatar" 			 nullValue="" />
+		<result property="linkedIn"				column="linkedin" 			 nullValue="" />
+		<result property="twitter"				column="twitter" 			 nullValue="" />
+		<result property="firstName" 			column="first_name" 		 nullValue="" />
+		<result property="lastName" 			column="last_name" 			 nullValue="" />
+		<result property="lastLogin" 			column="last_login" />
+		<result property="lastModification" 	column="last_modification" />
+		<result property="signupDate" 			column="signup_date" />
+		<result property="deleted" 				column="deleted" 			 nullValue="false" />
+		<result property="enabled" 				column="enabled" 			 nullValue="false" />
+		<result property="accountNonExpired" 	column="account_non_expired" nullValue="false" />
+		<result property="accountNonLocked" 	column="account_non_locked"	 nullValue="false" />
+		<result property="credentialsNonExpired" column="credentials_non_expired"
+			nullValue="false" />
+	</resultMap>
+
+	<!-- ======================== CACHE ======================= -->
+
+	<cacheModel id="accountCache" type="LRU">
+		<flushInterval hours="48" />
+		<flushOnExecute statement="Account.saveAccount" />
+		<flushOnExecute statement="Account.updateAccount" />
+		<property name="size" value="1000" />
+		<property name="read-only" value="true" />
+	</cacheModel>
+
+	<!-- ======================== STATEMENTS ======================= -->
+
+	<sql id="getAccount">
         <![CDATA[
             SELECT id, 
-            	   username
+            	   username,
                    password,
                    email,
+                   openid,
+                   gravatar,
+                   linkedin,
+                   twitter,
                    first_name,
                    last_name,
                    last_login,
@@ -55,76 +65,129 @@
                    credentials_non_expired
             FROM account
         ]]>
-    </sql>
-    
-    <select id="getAccountById" resultMap="accountResult" cacheModel="accountCache">
-        <include refid="Account.getAccount"/>
+	</sql>
+
+	<select id="getAccountById" resultMap="accountResult"
+		cacheModel="accountCache">
+		<include refid="Account.getAccount" />
         <![CDATA[
             WHERE id = #id#
         ]]>
-    </select>
-    
-    <select id="getAccountByEmail" resultMap="accountResult" cacheModel="accountCache">
-        <include refid="Account.getAccount"/>
+	</select>
+
+	<select id="getAccountByEmail" resultMap="accountResult"
+		cacheModel="accountCache">
+		<include refid="Account.getAccount" />
         <![CDATA[
             WHERE email = #email#
         ]]>
-    </select>
+	</select>
 
-    <select id="getAccountByUsername" resultMap="accountResult" cacheModel="accountCache">
-        <include refid="Account.getAccount"/>
+	<select id="getAccountByOpenId" resultMap="accountResult"
+		cacheModel="accountCache">
+		<include refid="Account.getAccount" />
         <![CDATA[
-            WHERE username = #username#
+            WHERE openid = #openId#
         ]]>
-    </select>
-     
-    <update id="updateAccount">
-    
-    </update>
-    
-    <update id="updateLastLogin">
+	</select>
+
+	<select id="getAccountByUsername" resultMap="accountResult"
+		cacheModel="accountCache">
+		<include refid="Account.getAccount" />
+        <![CDATA[
+            WHERE username = #userName#
+        ]]>
+	</select>
+
+	<update id="updateAccount" parameterClass="account">
+        <![CDATA[
+            UPDATE account
+            SET username				= #userName#,
+				password				= #password#,
+                email					= #email#,
+                openid					= #openId#,
+                gravatar				= #gravatar#,
+                linkedin				= #linkedIn#,
+                twitter					= #twitter#,
+                first_name				= #firstName#,
+                last_name				= #lastName#,
+                last_login				= #lastLogin#,
+                last_modification		= #lastModification#,
+                signup_date				= #signupDate#,
+                deleted					= #deleted#,
+                enabled					= #enabled#,
+                account_non_expired		= #accountNonExpired#,
+                account_non_locked		= #accountNonLocked#,
+				credentials_non_expired	= #credentialsNonExpired#
+            WHERE id = #id#
+        ]]>
+	</update>
+
+	<update id="updateLastLogin">
         <![CDATA[
             UPDATE account
             SET last_login  = #lastLogin#
-            WHERE id        = #accountId#
+            WHERE id        = #id#
          ]]>
-    </update>
+	</update>
 
 	<insert id="saveAccount" parameterClass="account">
-        <selectKey keyProperty="id" resultClass="long"> 
-            SELECT nextval('account_id_seq')    
+		<selectKey keyProperty="id" resultClass="long">
+			SELECT nextval('account_id_seq')    
         </selectKey>
         <![CDATA[
-            INSERT INTO account (id,
-            					 username, 
-		                   		 password,
-		                   		 email,
+            INSERT INTO account (id, 
+            	   				 username,
+                   				 password,
+			                     email,
+			                     openid,
+			                     gravatar,
+			                     linkedin,
+			                     twitter,
 			                     first_name,
 			                     last_name,
-			                     address,
-			                     postal_code,
-			                     city,
-			                     country,
-			                     date_of_birth,
-			                     telephone,
+			                     last_login,
+			                     last_modification,
 			                     signup_date,
 			                     deleted,
 			                     enabled,
 			                     account_non_expired,
 			                     account_non_locked,
-			                     credentials_non_expired)
+                   		         credentials_non_expired)
 			VALUES (#id#, 
-            		#username#,
-                    #password#, 
-                    #email#, 
+   	   				#userName#,
+               		#password#,
+                    #email#,
+                    #openId#,
+                    #gravatar#,
+                    #linkedIn#,
+                    #twitter#,
                     #firstName#,
                     #lastName#,
+                    #lastLogin#,
+                    #lastModification#,
                     #signupDate#,
                     #deleted#,
                     #enabled#,
                     #accountNonExpired#,
                     #accountNonLocked#,
-                    #credentialsNonExpired#)
+               		#credentialsNonExpired#)
         ]]>
+	</insert>
+	
+	
+        
+    <insert id="bindAccountRole">
+ 		<![CDATA[
+            INSERT INTO account_role (account_id, role_id)
+            VALUES (#accountId#, #roleId#)
+         ]]>
     </insert>
+    
+    <delete id="unbindAccountRoles">
+     	<![CDATA[
+            DELETE FROM account_role
+            WHERE account_id = #accountId#
+         ]]>
+    </delete>
 </sqlMap>

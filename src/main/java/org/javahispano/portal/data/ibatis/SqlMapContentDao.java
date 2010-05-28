@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.javahispano.portal.data.AccountDao;
 import org.javahispano.portal.data.CommentDao;
 import org.javahispano.portal.data.ContentDao;
 import org.javahispano.portal.data.TagDao;
@@ -20,10 +21,13 @@ import com.ibatis.sqlmap.client.SqlMapExecutor;
 /* ibatis 2 implementation of the content DAO 
 *
 * @author Sergi Almar i Graupera
+* @author Xavier Lluch Urrutia
 */
 @Repository
 public class SqlMapContentDao extends SqlMapGenericDao<Long, Content> implements ContentDao {
 
+	@Autowired
+	private AccountDao accountDao;
 	@Autowired
 	private TagDao tagDao;
 	@Autowired
@@ -41,6 +45,7 @@ public class SqlMapContentDao extends SqlMapGenericDao<Long, Content> implements
 		if(content != null) {
 			content.setTags(new HashSet<Tag>(tagDao.getByContentId(content.getId())));
 			content.setComments(commentDao.getByContentId(content.getId()));
+			content.setUser(accountDao.getById(content.getUser().getId()));
 		}
 		
 		return content;
